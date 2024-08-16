@@ -7,7 +7,9 @@ import { useEffect, useRef, useState } from "react";
 import { hightlightsSlides } from "../constants";
 import { pauseImg, playImg, replayImg } from "../utils";
 
+
 const VideoCarousel = () => {
+  {/*References so I can keep track of the video we are on*/}
   const videoRef = useRef([]);
   const videoSpanRef = useRef([]);
   const videoDivRef = useRef([]);
@@ -22,6 +24,7 @@ const VideoCarousel = () => {
   });
 
   const [loadedData, setLoadedData] = useState([]);
+  /*Destructuring the values*/
   const { isEnd, isLastVideo, startPlay, videoId, isPlaying } = video;
 
   useGSAP(() => {
@@ -113,7 +116,7 @@ const VideoCarousel = () => {
         gsap.ticker.remove(animUpdate);
       }
     }
-  }, [videoId, startPlay]);
+  }, [videoId, startPlay]);  /*whenever the videoId changes or startPlay chanegs*/
 
   useEffect(() => {
     if (loadedData.length > 3) {
@@ -158,9 +161,13 @@ const VideoCarousel = () => {
   return (
     <>
       <div className="flex items-center">
+
+        {/* iterando sobre cada slide*/}
         {hightlightsSlides.map((list, i) => (
           <div key={list.id} id="slider" className="sm:pr-20 pr-10">
             <div className="video-carousel_container">
+
+              {/*controlar o layout, o design e o comportamento visual do elemento */}
               <div className="w-full h-full flex-center rounded-3xl overflow-hidden bg-black">
                 <video
                   id="video"
@@ -170,6 +177,7 @@ const VideoCarousel = () => {
                   } pointer-events-none`}
                   preload="auto"
                   muted
+                  /*finding the especific index videoRef array and setting to this current video element*/
                   ref={(el) => (videoRef.current[i] = el)}
                   onEnded={() =>
                     i !== 3
@@ -179,12 +187,14 @@ const VideoCarousel = () => {
                   onPlay={() =>
                     setVideo((pre) => ({ ...pre, isPlaying: true }))
                   }
+                  /*wil get triggered when the event once the metaDate of the video has loaded */
                   onLoadedMetadata={(e) => handleLoadedMetaData(i, e)}
                 >
                   <source src={list.video} type="video/mp4" />
                 </video>
               </div>
 
+              {/* absolute the text on top of the video*/}
               <div className="absolute top-12 left-[5%] z-10">
                 {list.textLists.map((text, i) => (
                   <p key={i} className="md:text-2xl text-xl font-medium">
@@ -197,7 +207,9 @@ const VideoCarousel = () => {
         ))}
       </div>
 
+      {/*retangle shape so I can track the progression of the video */}
       <div className="relative flex-center mt-10">
+        {/*bolas correspondendo a quantidade de video*/}
         <div className="flex-center py-5 px-7 bg-gray-300 backdrop-blur rounded-full">
           {videoRef.current.map((_, i) => (
             <span
