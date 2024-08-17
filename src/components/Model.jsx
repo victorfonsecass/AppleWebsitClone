@@ -4,6 +4,8 @@ import ModelView from "./ModelView";
 import { useState } from "react";
 import { yellowImg } from "../utils";
 
+import * as THREE from 'three';
+
 const Model = () => {
   /* references for each phone  */
   const [size, setSize] = useState('small');
