@@ -1,4 +1,4 @@
-import { useGSAP } from "@gsap/react";
+import { useGSAP } from "@gsap/react"
 import gsap from "gsap";
 import ModelView from "./ModelView";
 import { useEffect, useRef, useState } from "react";
@@ -8,6 +8,7 @@ import * as THREE from 'three';
 import { Canvas } from "@react-three/fiber";
 import { View } from "@react-three/drei";
 import { models, sizes } from "../constants";
+import { animateWithGsapTimeline } from "../utils/animations";
 
 const Model = () => {
   /* references for each phone  */
@@ -51,6 +52,8 @@ const Model = () => {
   useGSAP(() => {
     gsap.to('#heading', { y: 0, opacity: 1 })
   }, []);
+
+  return (
   <section className="common-padding">
     {/*header*/}
     <div className="screen-max-width">
@@ -130,5 +133,6 @@ const Model = () => {
       </div>
     </div>
   </section>
+  )
 }
 export default Model
