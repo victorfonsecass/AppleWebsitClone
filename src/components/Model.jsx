@@ -1,10 +1,12 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ModelView from "./ModelView";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { yellowImg } from "../utils";
 
 import * as THREE from 'three';
+import { Canvas } from "@react-three/fiber";
+import { View } from "@react-three/drei";
 
 const Model = () => {
   /* references for each phone  */
@@ -41,8 +43,46 @@ const Model = () => {
       <div className="flex flex-col items-center mt-5">
         <div className="w-full h-[75vh] md:h-[90vh] overflow-hidden relative">
         {/*Rendering custm component that has all the logic*/}
+        {/*small divice*/}
         <ModelView
+          index={1}
+          groupRef={small}
+          gsapType="view1"
+          controlRef={cameraControlSmall}
+          setRotationState={setSmallRotation}
+          item={model}
+          size={size}
         />
+        {/*large divice*/}
+        <ModelView
+          index={2}
+          groupRef={large}
+          gsapType="view2"
+          controlRef={cameraControlLarge}
+          setRotationState={setLargeRotation}
+          item={model}
+          size={size}
+        />
+        {/*container para renderizar gráficos 3D*/}
+        <Canvas
+          className="w-full h-full"
+          style={{
+          position: 'fixed',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          overflow: 'hidden'
+          }}
+          /*usefull to interect with the model i´m working with*/
+          eventSource={document.getElementById('root')}
+        >
+          {/* Controla a Câmera */}
+          <View.Port/>
+        </Canvas>
+        </div>
+        <div className="mx-auto w-full">
+          
         </div>
       </div>
     </div>
