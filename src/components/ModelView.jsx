@@ -1,5 +1,7 @@
-import { PerspectiveCamera, View } from "@react-three/drei"
+import { Loader, PerspectiveCamera, View } from "@react-three/drei"
 import Lights from "./Lights"
+import IPhone from './IPhone';
+import { Suspense } from "react"
 
 {/*Make changes to the 3D models will display on screen */}
 const ModelView = ({ index, groupRef, gsapType, controlRef, setRotationState, size, item }) => {
@@ -16,7 +18,13 @@ const ModelView = ({ index, groupRef, gsapType, controlRef, setRotationState, si
       <PerspectiveCamera makeDefault position={[0, 0, 4]} />
 
       <Lights />
-      
+      <Suspense fallback={<Loader />}>
+        <IPhone
+          scale={index === 1 ? [15, 15, 15] : [17, 17, 17]}
+          item={item}
+          size={size}
+          />
+      </Suspense>
     </View>
   )
 }
