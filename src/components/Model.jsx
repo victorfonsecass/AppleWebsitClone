@@ -6,10 +6,18 @@ const Model = () => {
     gsap.to('#heading', { y: 0, opacity: 1 })
   }, []);
   <section className="common-padding">
+    {/*header*/}
     <div className="screen-max-width">
       <h1 id="heading" className="section-heading">
         Take a closer look.
       </h1>
+
+      {/*Container*/}
+      <div className="flex flex-col items-center mt-5">
+        <div className="w-full h-[75vh] md:h-[90vh] overflow-hidden relative">
+
+        </div>
+      </div>
     </div>
   </section>
 }
