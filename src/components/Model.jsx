@@ -95,6 +95,17 @@ const Model = () => {
                   />
                 ))}
               </ul>
+
+              <button className="size-btn-container">
+                {sizes.map(({ label, value }) => (
+                  <span key={label} className="size-btn" style={{
+                    backgroundColor: size === value ? 'white' : 'transparent',
+                    color: size === value ? 'black' : 'white'}}
+                    onClick={() => setSize(value)}>
+                    {label}
+                  </span>
+                ))}
+              </button>
           </div>
 
         </div>
